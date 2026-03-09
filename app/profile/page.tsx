@@ -12,6 +12,7 @@ export default function ProfilePage() {
   const { user, isLoading: isAuthLoading, isAuthenticated, saveProfile } = useAuth()
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
+  const [instagramHandle, setInstagramHandle] = useState('')
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showLoading, setShowLoading] = useState(true)
@@ -25,6 +26,7 @@ export default function ProfilePage() {
       } else if (user) {
         setName(user.name)
         setPhone(user.phone)
+        setInstagramHandle(user.instagramHandle)
       }
     }
   }, [isAuthLoading, isAuthenticated, user, router])
@@ -35,8 +37,8 @@ export default function ProfilePage() {
     setIsSubmitting(true)
 
     try {
-      if (!name.trim() || !phone.trim()) {
-        setError('Name and phone number are required')
+      if (!name.trim() || !phone.trim() || !instagramHandle.trim()) {
+        setError('All fields are required')
         return
       }
 
@@ -46,6 +48,7 @@ export default function ProfilePage() {
         email: user.email,
         name: name.trim(),
         phone: phone.trim(),
+        instagramHandle: instagramHandle.trim(),
         xp: user.xp,
         level: user.level,
       })
@@ -109,6 +112,21 @@ export default function ProfilePage() {
                 required
                 className="mt-2 bg-white/50 border-white/30 rounded-lg"
               />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium text-foreground">Instagram Handle</label>
+              <div className="relative mt-2">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground">@</span>
+                <Input
+                  type="text"
+                  placeholder="username"
+                  value={instagramHandle}
+                  onChange={(e) => setInstagramHandle(e.target.value)}
+                  required
+                  className="mt-0 pl-8 bg-white/50 border-white/30 rounded-lg"
+                />
+              </div>
             </div>
 
             {error && (

@@ -81,8 +81,8 @@ export default function AdminDashboard() {
     <div className="flex min-h-screen bg-gradient-to-br from-background via-primary/5 to-accent/10">
       <AdminSidebar />
 
-      <main className="flex-1 ml-64">
-        <div className="p-8">
+      <main className="flex-1 ml-64 max-sm:ml-0">
+        <div className="p-4 sm:p-6 md:p-8">
           {/* Header */}
           <div className="mb-8 animate-fadeInSlideUp">
             <h1 className="text-4xl font-bold text-foreground mb-2">Dashboard Overview</h1>

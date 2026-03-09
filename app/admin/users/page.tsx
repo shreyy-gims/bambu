@@ -236,8 +236,8 @@ export default function AdminUsersPage() {
         </div>
       )}
 
-      <main className="flex-1 ml-64">
-        <div className="p-8">
+      <main className="flex-1 ml-64 max-sm:ml-0">
+        <div className="p-4 sm:p-6 md:p-8">
           {/* Header */}
           <div className="mb-8 animate-fadeInSlideUp">
             <div className="flex items-center justify-between mb-4">

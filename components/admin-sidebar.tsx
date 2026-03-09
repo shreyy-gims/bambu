@@ -55,7 +55,7 @@ export default function AdminSidebar() {
   };
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-gradient-to-b from-sidebar to-sidebar/95 border-r border-sidebar-border flex flex-col">
+    <aside className="fixed left-0 top-0 h-screen w-64 bg-gradient-to-b from-sidebar to-sidebar/95 border-r border-sidebar-border flex flex-col max-sm:w-screen max-sm:z-50">
       {/* Logo */}
       <div className="p-6 border-b border-sidebar-border">
         <Link href="/admin" className="flex items-center gap-2 font-bold text-lg">

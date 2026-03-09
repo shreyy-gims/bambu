@@ -21,13 +21,11 @@ export default function LandingPage() {
     }
   }, [isLoading, isAuthenticated, router]);
 
-  const handleEnter = (userRole: 'client' | 'admin') => {
-    setRole(userRole);
+  const handleEnter = () => {
+    setRole('client');
     setIsEntering(true);
     setTimeout(() => {
-      if (userRole === 'admin') {
-        router.push('/admin-auth');
-      } else if (isAuthenticated) {
+      if (isAuthenticated) {
         router.push('/client');
       } else {
         router.push('/auth');
@@ -85,27 +83,16 @@ export default function LandingPage() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex gap-4 justify-center">
             <Button
-              onClick={() => handleEnter('client')}
-              disabled={isEntering && role !== 'client'}
-              className={`h-12 px-8 text-base font-semibold rounded-full transition-all ${
-                isEntering && role === 'client' ? 'opacity-0 scale-95' : ''
+              onClick={() => handleEnter()}
+              disabled={isEntering}
+              className={`h-12 px-12 text-base font-semibold rounded-full transition-all ${
+                isEntering ? 'opacity-0 scale-95' : ''
               }`}
               size="lg"
             >
-              Enter as Customer
-            </Button>
-            <Button
-              onClick={() => handleEnter('admin')}
-              disabled={isEntering && role !== 'admin'}
-              variant="outline"
-              className={`h-12 px-8 text-base font-semibold rounded-full transition-all ${
-                isEntering && role === 'admin' ? 'opacity-0 scale-95' : ''
-              }`}
-              size="lg"
-            >
-              Admin Portal
+              Start Shopping
             </Button>
           </div>
 

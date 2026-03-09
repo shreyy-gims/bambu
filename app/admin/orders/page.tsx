@@ -115,8 +115,8 @@ export default function AdminOrdersPage() {
     <div className="flex min-h-screen bg-gradient-to-br from-background via-primary/5 to-accent/10">
       <AdminSidebar />
 
-      <main className="flex-1 ml-64">
-        <div className="p-8">
+      <main className="flex-1 ml-64 max-sm:ml-0">
+        <div className="p-4 sm:p-6 md:p-8">
           {/* Header */}
           <div className="mb-8 animate-fadeInSlideUp">
             <h1 className="text-4xl font-bold text-foreground mb-2">Orders</h1>
@@ -125,21 +125,23 @@ export default function AdminOrdersPage() {
 
           {/* Filters and search */}
           <div className="mb-8 space-y-4">
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/50" />
-                <input
-                  type="text"
-                  placeholder="Search by order ID or customer name..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 rounded-lg bg-white/10 border border-white/20 text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-primary/50"
-                />
+            <div className="flex flex-col gap-2 sm:gap-4">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+                <div className="flex-1 relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/50" />
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 rounded-lg bg-white/10 border border-white/20 text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-primary/50 text-sm"
+                  />
+                </div>
+                <Button variant="outline" className="rounded-lg gap-2 text-sm">
+                  <Download className="w-4 h-4" />
+                  <span className="hidden sm:inline">Export</span>
+                </Button>
               </div>
-              <Button variant="outline" className="rounded-lg gap-2">
-                <Download className="w-4 h-4" />
-                Export
-              </Button>
             </div>
 
             {/* Status filters */}
@@ -168,44 +170,44 @@ export default function AdminOrdersPage() {
 
           {/* Orders table */}
           <Card className="glass rounded-2xl border-white/20 animate-fadeInSlideUp" style={{ animationDelay: '100ms' }}>
-            <CardContent className="p-0">
-              <div className="overflow-x-auto">
-                <table className="w-full">
+            <CardContent className="p-0 overflow-hidden">
+              <div className="overflow-x-auto -mx-4 sm:mx-0">
+                <table className="w-full min-w-[600px]">
                   <thead>
                     <tr className="border-b border-white/10">
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Order ID</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Customer</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Table #</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Items</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Amount</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Status</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Date</th>
-                      <th className="px-6 py-4 text-left text-sm font-semibold text-foreground">Action</th>
+                      <th className="px-3 sm:px-6 py-4 text-left text-xs sm:text-sm font-semibold text-foreground">Order ID</th>
+                      <th className="px-3 sm:px-6 py-4 text-left text-xs sm:text-sm font-semibold text-foreground">Customer</th>
+                      <th className="px-3 sm:px-6 py-4 text-left text-xs sm:text-sm font-semibold text-foreground hidden sm:table-cell">Table #</th>
+                      <th className="px-3 sm:px-6 py-4 text-left text-xs sm:text-sm font-semibold text-foreground hidden md:table-cell">Items</th>
+                      <th className="px-3 sm:px-6 py-4 text-left text-xs sm:text-sm font-semibold text-foreground">Amount</th>
+                      <th className="px-3 sm:px-6 py-4 text-left text-xs sm:text-sm font-semibold text-foreground hidden md:table-cell">Status</th>
+                      <th className="px-3 sm:px-6 py-4 text-left text-xs sm:text-sm font-semibold text-foreground hidden lg:table-cell">Date</th>
+                      <th className="px-3 sm:px-6 py-4 text-left text-xs sm:text-sm font-semibold text-foreground">Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredOrders.map(order => (
                       <tr key={order.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                        <td className="px-6 py-4 font-semibold text-foreground">{order.id}</td>
-                        <td className="px-6 py-4">
+                        <td className="px-3 sm:px-6 py-4 font-semibold text-foreground text-xs sm:text-sm">{order.id}</td>
+                        <td className="px-3 sm:px-6 py-4">
                           <div>
-                            <p className="font-medium text-foreground">{order.customer}</p>
-                            <p className="text-sm text-foreground/60">{order.email}</p>
+                            <p className="font-medium text-foreground text-xs sm:text-sm">{order.customer}</p>
+                            <p className="text-xs text-foreground/60 hidden sm:block">{order.email}</p>
                           </div>
                         </td>
-                        <td className="px-6 py-4">
-                          <Badge className="bg-primary/20 text-primary border border-primary/30">
-                            Table {order.tableNumber}
+                        <td className="px-3 sm:px-6 py-4 hidden sm:table-cell">
+                          <Badge className="bg-primary/20 text-primary border border-primary/30 text-xs">
+                            T{order.tableNumber}
                           </Badge>
                         </td>
-                        <td className="px-6 py-4 text-foreground">{order.items}</td>
-                        <td className="px-6 py-4 font-semibold text-foreground">{order.amount}</td>
-                        <td className="px-6 py-4">
-                          <Badge className={`capitalize ${getStatusColor(order.status)} border`}>
+                        <td className="px-3 sm:px-6 py-4 text-foreground hidden md:table-cell text-xs sm:text-sm">{order.items}</td>
+                        <td className="px-3 sm:px-6 py-4 font-semibold text-foreground text-xs sm:text-sm">{order.amount}</td>
+                        <td className="px-3 sm:px-6 py-4 hidden md:table-cell">
+                          <Badge className={`capitalize ${getStatusColor(order.status)} border text-xs`}>
                             {order.status}
                           </Badge>
                         </td>
-                        <td className="px-6 py-4 text-sm text-foreground/70">{order.date}</td>
+                        <td className="px-3 sm:px-6 py-4 text-xs text-foreground/70 hidden lg:table-cell">{order.date}</td>
                         <td className="px-6 py-4">
                           <div className="flex gap-2 items-center">
                             {order.status === 'pending' ? (
